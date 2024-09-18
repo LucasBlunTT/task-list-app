@@ -11,7 +11,7 @@ export const arrayTasks: Task[] = [
     id: '1',
     taskName: 'Design Meeting',
     taskTime: '10:00 AM',
-    completo: false,
+    completo: true,
   },
   {
     id: '2',
@@ -30,41 +30,5 @@ export const arrayTasks: Task[] = [
     taskName: 'Development Sync',
     taskTime: '3:00 PM',
     completo: false,
-  },
-  {
-    id: '5',
-    taskName: 'End of Day Wrap-up',
-    taskTime: '5:00 PM',
-    completo: true,
-  },
-  {
-    id: '6',
-    taskName: 'Team Stand-up',
-    taskTime: '9:00 AM',
-    completo: false,
-  },
-  {
-    id: '7',
-    taskName: 'Code Review',
-    taskTime: '2:00 PM',
-    completo: false,
-  },
-  {
-    id: '8',
-    taskName: 'Client Call',
-    taskTime: '4:00 PM',
-    completo: false,
-  },
-  {
-    id: '9',
-    taskName: 'Prepare Presentation',
-    taskTime: '6:00 PM',
-    completo: false,
-  },
-  {
-    id: '10',
-    taskName: 'Fitness Time',
-    taskTime: '7:30 PM',
-    completo: true,
   },
 ];

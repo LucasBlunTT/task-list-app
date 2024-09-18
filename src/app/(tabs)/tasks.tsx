@@ -62,7 +62,7 @@ export default function Tasks() {
               key={item.id}
               taskName={item.taskName}
               taskTime={item.taskTime}
-              onComplete={() => console.log(`${item.taskName} completed!`)}
+              complete={item.completo}
             />
           )}
           keyExtractor={(item) => item.id}

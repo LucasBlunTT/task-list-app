@@ -1,14 +1,17 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 type CardTaskProps = {
   taskName: string;
   taskTime: string;
-  onComplete: () => void;
+  complete: boolean;
 };
 
-const CardTask = ({ taskName, taskTime, onComplete }: CardTaskProps) => {
+const CardTask = ({ taskName, taskTime, complete }: CardTaskProps) => {
+  const [check, setCheck] = useState(complete);
+  console.log(check);
+
   return (
     <View
       className="bg-[#E2EBFA] p-4 rounded-2xl flex-row items-center justify-between"
@@ -18,12 +21,13 @@ const CardTask = ({ taskName, taskTime, onComplete }: CardTaskProps) => {
         <Text className="text-sm font-bold">{taskName}</Text>
         <Text className="text-xs text-slate-400">{taskTime}</Text>
       </View>
-      <TouchableOpacity onPress={onComplete}>
+      <TouchableOpacity>
         <MaterialIcons
-          name="check-circle"
+          name={check ? 'check-box' : 'check-box-outline-blank'}
           size={20}
           color={'#0760FB'}
           className="ml-8"
+          onPress={() => setCheck(!check)}
         />
       </TouchableOpacity>
     </View>
