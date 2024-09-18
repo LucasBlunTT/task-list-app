@@ -10,8 +10,7 @@ type CardTaskProps = {
 
 const CardTask = ({ taskName, taskTime, complete }: CardTaskProps) => {
   const [check, setCheck] = useState(complete);
-  console.log(check);
-
+  
   return (
     <View
       className="bg-[#E2EBFA] p-4 rounded-2xl flex-row items-center justify-between"

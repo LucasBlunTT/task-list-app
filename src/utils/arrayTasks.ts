@@ -11,7 +11,7 @@ export const arrayTasks: Task[] = [
     id: '1',
     taskName: 'Design Meeting',
     taskTime: '10:00 AM',
-    completo: true,
+    completo: false,
   },
   {
     id: '2',

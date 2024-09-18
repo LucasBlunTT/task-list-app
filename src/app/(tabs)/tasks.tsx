@@ -8,6 +8,7 @@ export default function Tasks() {
   // Corrigido para começar com letra maiúscula (boas práticas)
   const [dataToday, setDataToday] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     setTasks(arrayTasks);
@@ -45,6 +46,8 @@ export default function Tasks() {
     setDataToday(formattedDate);
   }, []);
 
+  console.log(openModal);
+
   return (
     <View className="flex-1 bg-white pt-14 p-4 justify-between">
       {/* Header */}
@@ -68,16 +71,15 @@ export default function Tasks() {
           keyExtractor={(item) => item.id}
           ItemSeparatorComponent={() => <View style={{ height: 10 }} />} // Define um espaçamento vertical
           contentContainerStyle={{
-            flexGrow: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            paddingBottom: 60, // Adiciona um espaçamento inferior para evitar que o último item seja escondido
-          }} // Centraliza os itens
+            paddingBottom: 30, // Adiciona um espaçamento inferior para evitar que o último item seja escondido
+          }}
         />
       </View>
 
       {/* Card ADD Tasks */}
-      <AddTask />
+      <AddTask onPress={() => setOpenModal(!openModal)} />
     </View>
   );
 }
