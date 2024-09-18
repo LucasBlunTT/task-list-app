@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import CardTask from '@/components/cardTask/cardTask';
+import { AddTask } from '@/components/addTask/addTask';
 
 export default function Chat() {
   const [dataToday, setDataToday] = useState('');
@@ -49,21 +51,25 @@ export default function Chat() {
   }, []);
 
   return (
-    <View className="flex-1 bg-white pt-14 p-4 justify-between">
-      <View className="items-center justify-center">
+    <>
+      {/* Container principal */}
+      <View className="flex-1 bg-white pt-14 p-4 justify-between">
+        {/* Header */}
         <View className="items-center justify-center">
-          <Text className="text-2xl font-bold">Today's Task</Text>
-          <Text className="text-slate-400">{dataToday}</Text>
+          <View className="items-center justify-center">
+            <Text className="text-2xl font-bold">Today's Task</Text>
+            <Text className="text-slate-400">{dataToday}</Text>
+          </View>
         </View>
-      </View>
 
-      <TouchableOpacity
-        className="p-4 bg-[#E2EBFA]  rounded-2xl flex-row items-center justify-center"
-        activeOpacity={0.3}
-      >
-        <MaterialIcons name="add" size={20} />
-        <Text className="text-sm color-[#0760FB] ">New Task</Text>
-      </TouchableOpacity>
-    </View>
+        {/* Body */}
+        <View className="pt-4 w-full items-center justify-center">
+          <CardTask />
+        </View>
+
+        {/* Card ADD Tasks */}
+        <AddTask />
+      </View>
+    </>
   );
 }
