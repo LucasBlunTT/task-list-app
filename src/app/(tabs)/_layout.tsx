@@ -30,7 +30,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="chat"
+        name="tasks"
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons name="list" size={size} color={color} />
