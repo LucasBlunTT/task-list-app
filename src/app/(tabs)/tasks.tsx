@@ -1,10 +1,9 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { MaterialIcons } from '@expo/vector-icons';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
 
-export default function Chat() {
+export default function tasks() {
   const [dataToday, setDataToday] = useState('');
 
   useEffect(() => {

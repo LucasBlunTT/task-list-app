@@ -22,7 +22,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="messages"
+        name="index"
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons name="message" size={size} color={color} />
