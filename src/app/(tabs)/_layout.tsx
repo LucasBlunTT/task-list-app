@@ -22,7 +22,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="messages"
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons name="message" size={size} color={color} />
@@ -38,7 +38,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="meeting"
+        name="activity"
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons name="access-time" size={size} color={color} />
