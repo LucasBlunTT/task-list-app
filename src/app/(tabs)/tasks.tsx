@@ -1,16 +1,18 @@
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
+import { arrayTasks, Task } from '@/utils/arrayTasks';
 
-export default function tasks() {
+export default function Tasks() {
+  // Corrigido para começar com letra maiúscula (boas práticas)
   const [dataToday, setDataToday] = useState('');
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    // Obter a data atual
-    const date = new Date();
+    setTasks(arrayTasks);
 
-    // Array com os nomes dos dias da semana
+    const date = new Date();
     const days = [
       'Domingo',
       'Segunda-feira',
@@ -20,8 +22,6 @@ export default function tasks() {
       'Sexta-feira',
       'Sábado',
     ];
-
-    // Array com os nomes dos meses
     const months = [
       'Janeiro',
       'Fevereiro',
@@ -37,38 +37,47 @@ export default function tasks() {
       'Dezembro',
     ];
 
-    // Formatar a data
-    const dayName = days[date.getDay()]; // Nome do dia da semana
-    const day = date.getDate(); // Dia do mês
-    const monthName = months[date.getMonth()]; // Nome do mês
+    const dayName = days[date.getDay()];
+    const day = date.getDate();
+    const monthName = months[date.getMonth()];
 
-    // Criar uma string formatada
     const formattedDate = `${dayName}, ${day} de ${monthName}`;
-
-    // Atualizar o estado com a data formatada
     setDataToday(formattedDate);
   }, []);
 
   return (
-    <>
-      {/* Container principal */}
-      <View className="flex-1 bg-white pt-14 p-4 justify-between">
-        {/* Header */}
-        <View className="items-center justify-center">
-          <View className="items-center justify-center">
-            <Text className="text-2xl font-bold">Today's Task</Text>
-            <Text className="text-slate-400">{dataToday}</Text>
-          </View>
-        </View>
-
-        {/* Body */}
-        <View className="pt-4 w-full items-center justify-center">
-          <CardTask />
-        </View>
-
-        {/* Card ADD Tasks */}
-        <AddTask />
+    <View className="flex-1 bg-white pt-14 p-4 justify-between">
+      {/* Header */}
+      <View className="items-center justify-center mb-4">
+        <Text className="text-2xl font-bold">Today's Task</Text>
+        <Text className="text-slate-400">{dataToday}</Text>
       </View>
-    </>
+
+      {/* Body */}
+      <View className="w-full items-center justify-center">
+        <FlatList
+          data={tasks}
+          renderItem={({ item }) => (
+            <CardTask
+              key={item.id}
+              taskName={item.taskName}
+              taskTime={item.taskTime}
+              onComplete={() => console.log(`${item.taskName} completed!`)}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={() => <View style={{ height: 10 }} />} // Define um espaçamento vertical
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: 60, // Adiciona um espaçamento inferior para evitar que o último item seja escondido
+          }} // Centraliza os itens
+        />
+      </View>
+
+      {/* Card ADD Tasks */}
+      <AddTask />
+    </View>
   );
 }
