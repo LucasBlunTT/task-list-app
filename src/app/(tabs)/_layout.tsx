@@ -18,14 +18,14 @@ export default function TabLayout() {
         },
         tabBarShowLabel: false,
         tabBarActiveTintColor: colors.blue, // Cor dos ícones ativos (azul, harmonizando)
-        tabBarInactiveTintColor: colors.gray[700], // Cor dos ícones inativos (cinza, harmonizando)
+        tabBarInactiveTintColor: colors.gray[800], // Cor dos ícones inativos (cinza, harmonizando)
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           tabBarIcon: ({ size, color }) => (
-            <MaterialIcons name="email" size={size} color={color} />
+            <MaterialIcons name="message" size={size} color={color} />
           ),
         }}
       />
@@ -33,7 +33,7 @@ export default function TabLayout() {
         name="chat"
         options={{
           tabBarIcon: ({ size, color }) => (
-            <MaterialIcons name="chat-bubble" size={size} color={color} />
+            <MaterialIcons name="list" size={size} color={color} />
           ),
         }}
       />
@@ -41,7 +41,7 @@ export default function TabLayout() {
         name="meeting"
         options={{
           tabBarIcon: ({ size, color }) => (
-            <MaterialIcons name="videocam" size={size} color={color} />
+            <MaterialIcons name="access-time" size={size} color={color} />
           ),
         }}
       />
