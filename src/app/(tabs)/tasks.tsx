@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Chat() {
   const [dataToday, setDataToday] = useState('');
@@ -48,19 +49,21 @@ export default function Chat() {
   }, []);
 
   return (
-    <View className="flex-1 bg-white pt-14 p-4">
-      <View>
-        <View className="items-start justify-center">
+    <View className="flex-1 bg-white pt-14 p-4 justify-between">
+      <View className="items-center justify-center">
+        <View className="items-center justify-center">
           <Text className="text-2xl font-bold">Today's Task</Text>
           <Text className="text-slate-400">{dataToday}</Text>
         </View>
-
-        <TouchableOpacity>
-          <Text className="text-gray-900">
-            Clique aqui para adicionar uma nova tarefa
-          </Text>
-        </TouchableOpacity>
       </View>
+
+      <TouchableOpacity
+        className="p-4 bg-[#E2EBFA]  rounded-2xl flex-row items-center justify-center"
+        activeOpacity={0.3}
+      >
+        <MaterialIcons name="add" size={20} />
+        <Text className="text-sm color-[#0760FB] ">New Task</Text>
+      </TouchableOpacity>
     </View>
   );
 }
