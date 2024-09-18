@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 type CardTaskProps = {
-  taskName: string;
-  taskTime: string;
-  complete: boolean;
+  taskName?: string;
+  taskTime?: string;
+  complete?: boolean;
 };
 
 const CardTask = ({ taskName, taskTime, complete }: CardTaskProps) => {
