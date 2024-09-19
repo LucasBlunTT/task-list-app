@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
 import { arrayTasks, Task } from '@/utils/arrayTasks';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Tasks() {
   const [dataToday, setDataToday] = useState('');
@@ -115,15 +116,28 @@ export default function Tasks() {
                 cursorColor={'#000'}
               />
             </View>
+            <TouchableOpacity
+              onPress={() => {
+                setOpenModal(false);
+                setText('');
+              }}
+              className="mt-4 p-2 bg-blue rounded-md"
+            >
+              <Text className="text-white text-center font-bold">
+                Adicionar Tarefa
+              </Text>
+            </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => {
                 setOpenModal(false);
                 setText('');
               }}
-              className="mt-4 p-2 bg-blue-500 rounded-md"
+              className="mt-4 p-2 bg-gray-500 rounded-md" // Cor cinza para o botão de fechar
             >
-              <Text className="text-black text-center">Fechar Modal</Text>
+              <Text className="text-white text-center font-bold">
+                Fechar Modal
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
