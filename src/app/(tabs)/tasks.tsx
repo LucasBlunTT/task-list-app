@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CleanTask } from '@/components/cleanTask/cleanTask';
 
 interface Task {
   id: string;
@@ -83,7 +84,7 @@ export default function Tasks() {
   }
 
   return (
-    <View className="flex-1 bg-white pt-14 p-4 justify-between">
+    <View className="flex-1 bg-white pt-14 p-4 relative">
       {/* Header */}
       <View className="items-center justify-center mb-4">
         <Text className="text-2xl font-bold">Today's Task</Text>
@@ -113,7 +114,10 @@ export default function Tasks() {
       </View>
 
       {/* Card ADD Tasks */}
-      <AddTask onPress={() => setOpenModal(true)} />
+      <View className="absolute w-full bottom-0 right-3">
+        <CleanTask />
+        <AddTask onPress={() => setOpenModal(true)} />
+      </View>
 
       {/* Modal */}
       <Modal
