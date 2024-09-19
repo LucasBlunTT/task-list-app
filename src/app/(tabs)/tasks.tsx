@@ -9,8 +9,14 @@ import {
 import React, { useEffect, useState } from 'react';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
-import { arrayTasks, Task } from '@/utils/arrayTasks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+interface Task {
+  id: string;
+  taskName: string;
+  taskTime: string;
+  completo: boolean;
+}
 
 export default function Tasks() {
   const [dataToday, setDataToday] = useState('');
@@ -20,7 +26,7 @@ export default function Tasks() {
   const [textName, setTextName] = useState('');
 
   useEffect(() => {
-    setTasks(arrayTasks);
+    getTasks();
 
     const date = new Date();
     const days = [
@@ -53,7 +59,14 @@ export default function Tasks() {
 
     const formattedDate = `${dayName}, ${day} de ${monthName}`;
     setDataToday(formattedDate);
-  }, []);
+  }, [tasks]);
+
+  async function getTasks() {
+    const tasksStorage = await AsyncStorage.getItem('@tasks');
+    if (tasksStorage) {
+      setTasks(JSON.parse(tasksStorage));
+    }
+  }
 
   async function saveTask() {
     const newTask = {
@@ -130,11 +143,13 @@ export default function Tasks() {
                 keyboardType="numeric"
                 value={taskTime}
                 onChangeText={setTaskTime}
+                cursorColor={'#000'}
                 maxLength={4}
               />
             </View>
             <TouchableOpacity
               onPress={() => {
+                saveTask();
                 setOpenModal(false);
                 setTextName('');
                 setTaskTime('');
