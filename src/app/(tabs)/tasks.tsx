@@ -1,14 +1,21 @@
-import { View, Text, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  Modal,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
 import { arrayTasks, Task } from '@/utils/arrayTasks';
 
 export default function Tasks() {
-  // Corrigido para começar com letra maiúscula (boas práticas)
   const [dataToday, setDataToday] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
   const [openModal, setOpenModal] = useState(false);
+  const [text, setText] = useState('');
 
   useEffect(() => {
     setTasks(arrayTasks);
@@ -46,8 +53,6 @@ export default function Tasks() {
     setDataToday(formattedDate);
   }, []);
 
-  console.log(openModal);
-
   return (
     <View className="flex-1 bg-white pt-14 p-4 justify-between">
       {/* Header */}
@@ -69,17 +74,60 @@ export default function Tasks() {
             />
           )}
           keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={() => <View style={{ height: 10 }} />} // Define um espaçamento vertical
+          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
           contentContainerStyle={{
             justifyContent: 'center',
             alignItems: 'center',
-            paddingBottom: 30, // Adiciona um espaçamento inferior para evitar que o último item seja escondido
+            paddingBottom: 30,
           }}
         />
       </View>
 
       {/* Card ADD Tasks */}
-      <AddTask onPress={() => setOpenModal(!openModal)} />
+      <AddTask onPress={() => setOpenModal(true)} />
+
+      {/* Modal */}
+      <Modal
+        visible={openModal}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setOpenModal(false)} // Fecha o modal ao pressionar o botão voltar no Android
+      >
+        <View className="flex-1 justify-center items-center bg-black/50">
+          <View className="items-center bg-white p-6 rounded-lg w-4/5">
+            <View className="w-full items-center">
+              <Text className="text-xl font-bold mb-4">
+                Adicionar Nova Tarefa
+              </Text>
+              <TextInput
+                value={text}
+                onChangeText={setText}
+                placeholder="Digite sua melhor tarefa"
+                style={{
+                  height: 40,
+                  borderColor: 'gray',
+                  borderWidth: 1,
+                  paddingHorizontal: 10,
+                  borderRadius: 5,
+                  width: '100%',
+                }}
+                autoFocus={true}
+                cursorColor={'#000'}
+              />
+            </View>
+
+            <TouchableOpacity
+              onPress={() => {
+                setOpenModal(false);
+                setText('');
+              }}
+              className="mt-4 p-2 bg-blue-500 rounded-md"
+            >
+              <Text className="text-black text-center">Fechar Modal</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }

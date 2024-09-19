@@ -1,30 +1,59 @@
-import { colors } from '@/styles/colors'
-import {View, TextInput, TextInputProps} from 'react-native'
+import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { Feather } from '@expo/vector-icons'; // Ícones para uma experiência melhor
 
-type InputProps = {
-  children: React.ReactNode
-}
+const BestInput = () => {
+  const [text, setText] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
-function Input({ children }: InputProps) {
+  // Função simples de validação (exemplo: mínimo de 3 caracteres)
+  const validateInput = (input: string | any[]) => {
+    if (input.length >= 3) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  };
+
   return (
-  <View
-    className='w-full h-14 bg-gray-800 rounded-lg p-4 flex-row items-center gap-4'>
-    {children}
-  </View>
-  )
-}
+    <View className="p-4">
+      <View
+        className={`border ${
+          isFocused ? 'border-blue-500' : 'border-gray-400'
+        } rounded-lg flex-row items-center p-3`}
+      >
+        <Feather name="edit" size={20} color={isFocused ? 'blue' : 'gray'} />
 
-function InputField({ ...rest }: TextInputProps) {
-  return (
-    <TextInput 
-      className='flex-1 font-normal text-base text-white' 
-      placeholderTextColor={colors.gray[400]} 
-      cursorColor={colors.blue[600]}
-      {...rest}
-    />
-   )
-}
+        <TextInput
+          className="flex-1 ml-2 text-gray-800"
+          value={text}
+          onChangeText={(value) => {
+            setText(value);
+            validateInput(value);
+          }}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="Digite pelo menos 3 caracteres..."
+          placeholderTextColor="gray"
+          keyboardType="default"
+          maxLength={100}
+          accessibilityLabel="Campo de texto para inserir uma tarefa"
+        />
+        {text.length > 0 && (
+          <TouchableOpacity onPress={() => setText('')}>
+            <Feather name="x-circle" size={20} color="gray" />
+          </TouchableOpacity>
+        )}
+      </View>
 
-Input.Field = InputField
+      {!isValid && (
+        <Text className="text-red-500 mt-1">
+          A entrada deve ter pelo menos 3 caracteres.
+        </Text>
+      )}
+    </View>
+  );
+};
 
-export { Input }
+export default BestInput;
