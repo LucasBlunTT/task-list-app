@@ -10,12 +10,14 @@ import React, { useEffect, useState } from 'react';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
 import { arrayTasks, Task } from '@/utils/arrayTasks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Tasks() {
   const [dataToday, setDataToday] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [taskTime, setTaskTime] = useState('');
   const [openModal, setOpenModal] = useState(false);
-  const [text, setText] = useState('');
+  const [textName, setTextName] = useState('');
 
   useEffect(() => {
     setTasks(arrayTasks);
@@ -52,6 +54,20 @@ export default function Tasks() {
     const formattedDate = `${dayName}, ${day} de ${monthName}`;
     setDataToday(formattedDate);
   }, []);
+
+  async function saveTask() {
+    const newTask = {
+      id: String(Math.random()),
+      taskName: textName,
+      taskTime,
+      completo: false,
+    };
+
+    const tasksUpdated = [...tasks, newTask];
+    setTasks(tasksUpdated);
+
+    await AsyncStorage.setItem('@tasks', JSON.stringify(tasksUpdated));
+  }
 
   return (
     <View className="flex-1 bg-white pt-14 p-4 justify-between">
@@ -100,18 +116,28 @@ export default function Tasks() {
                 Adicionar Nova Tarefa
               </Text>
               <TextInput
-                value={text}
-                onChangeText={setText}
+                value={textName}
+                onChangeText={setTextName}
                 placeholder="Digite sua tarefa"
                 className="border border-gray-300 p-3 rounded-lg w-full"
                 autoFocus={true}
                 cursorColor={'#000'}
+                maxLength={37}
+              />
+              <TextInput
+                placeholder="Digite o horário"
+                className="border border-gray-300 p-3 rounded-lg w-full mt-4"
+                keyboardType="numeric"
+                value={taskTime}
+                onChangeText={setTaskTime}
+                maxLength={4}
               />
             </View>
             <TouchableOpacity
               onPress={() => {
                 setOpenModal(false);
-                setText('');
+                setTextName('');
+                setTaskTime('');
               }}
               className="mt-4 p-3 bg-blue rounded-lg w-full"
             >
@@ -123,7 +149,8 @@ export default function Tasks() {
             <TouchableOpacity
               onPress={() => {
                 setOpenModal(false);
-                setText('');
+                setTextName('');
+                setTaskTime('');
               }}
               className="mt-2 p-3 bg-red-500 rounded-lg w-full"
             >
