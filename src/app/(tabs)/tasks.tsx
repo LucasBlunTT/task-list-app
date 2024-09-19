@@ -66,6 +66,8 @@ export default function Tasks() {
     const tasksStorage = await AsyncStorage.getItem('@tasks');
     if (tasksStorage) {
       setTasks(JSON.parse(tasksStorage));
+    } else {
+      setTasks([]);
     }
   }
 
@@ -81,6 +83,12 @@ export default function Tasks() {
     setTasks(tasksUpdated);
 
     await AsyncStorage.setItem('@tasks', JSON.stringify(tasksUpdated));
+  }
+
+  async function cleanTask() {
+    await AsyncStorage.removeItem('@tasks');
+    setTasks([]);
+    getTasks();
   }
 
   return (
@@ -114,8 +122,8 @@ export default function Tasks() {
       </View>
 
       {/* Card ADD Tasks */}
-      <View className="absolute w-full bottom-0 right-3">
-        <CleanTask />
+      <View className="absolute w-full bottom-0 right-4">
+        <CleanTask onPress={cleanTask} />
         <AddTask onPress={() => setOpenModal(true)} />
       </View>
 
