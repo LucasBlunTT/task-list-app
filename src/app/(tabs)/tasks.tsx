@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react';
 import CardTask from '@/components/cardTask/cardTask';
 import { AddTask } from '@/components/addTask/addTask';
 import { arrayTasks, Task } from '@/utils/arrayTasks';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Tasks() {
   const [dataToday, setDataToday] = useState('');
@@ -92,26 +91,19 @@ export default function Tasks() {
         visible={openModal}
         animationType="fade"
         transparent={true}
-        onRequestClose={() => setOpenModal(false)} // Fecha o modal ao pressionar o botão voltar no Android
+        onRequestClose={() => setOpenModal(false)}
       >
-        <View className="flex-1 justify-center items-center bg-black/50">
-          <View className="items-center bg-white p-6 rounded-lg w-4/5">
+        <View className="flex-1 justify-center items-center bg-black/60">
+          <View className="items-center bg-white p-8 rounded-2xl w-11/12">
             <View className="w-full items-center">
-              <Text className="text-xl font-bold mb-4">
+              <Text className="text-2xl font-bold text-gray-800 mb-4">
                 Adicionar Nova Tarefa
               </Text>
               <TextInput
                 value={text}
                 onChangeText={setText}
-                placeholder="Digite sua melhor tarefa"
-                style={{
-                  height: 40,
-                  borderColor: 'gray',
-                  borderWidth: 1,
-                  paddingHorizontal: 10,
-                  borderRadius: 5,
-                  width: '100%',
-                }}
+                placeholder="Digite sua tarefa"
+                className="border border-gray-300 p-3 rounded-lg w-full"
                 autoFocus={true}
                 cursorColor={'#000'}
               />
@@ -121,7 +113,7 @@ export default function Tasks() {
                 setOpenModal(false);
                 setText('');
               }}
-              className="mt-4 p-2 bg-blue rounded-md"
+              className="mt-4 p-3 bg-blue rounded-lg w-full"
             >
               <Text className="text-white text-center font-bold">
                 Adicionar Tarefa
@@ -133,7 +125,7 @@ export default function Tasks() {
                 setOpenModal(false);
                 setText('');
               }}
-              className="mt-4 p-2 bg-gray-500 rounded-md" // Cor cinza para o botão de fechar
+              className="mt-2 p-3 bg-red-500 rounded-lg w-full"
             >
               <Text className="text-white text-center font-bold">
                 Fechar Modal
