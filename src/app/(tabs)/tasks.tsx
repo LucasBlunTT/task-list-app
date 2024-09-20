@@ -94,7 +94,7 @@ export default function Tasks() {
 
   function filterTasks(textFilter: string) {
     if (textFilter === '') {
-      return tasks; // Retorna todas as tarefas se não houver filtro
+      return tasks;
     }
   
     return tasks.filter((task: Task) =>
