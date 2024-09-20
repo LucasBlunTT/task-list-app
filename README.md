@@ -1,8 +1,9 @@
 # PROJETO TASKS APP | Aplicativo Mobile em React Native
 
 ## 📷 Screenshot
-![image](https://github.com/user-attachments/assets/a8fa0dd4-2ded-4f32-831b-20727aad5785)
+![WhatsApp Image 2024-09-20 at 12 41 53](https://github.com/user-attachments/assets/af43f1bb-c47f-4a36-a922-8ae61f9ad90b)
 ![image](https://github.com/user-attachments/assets/17113fa8-f0be-4ffe-971f-78250b13df20)
+
 
 ## 📋 Descrição do Projeto
 Este é um projeto de um aplicativo de gerenciamento de tarefas desenvolvido em React Native. O objetivo é permitir que os usuários adicionem, visualizem e limpem suas tarefas, com uma interface intuitiva e fácil de usar.
