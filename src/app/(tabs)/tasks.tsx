@@ -130,7 +130,7 @@ export default function Tasks() {
       {/* Body */}
       <View className="w-full items-center justify-center">
         <FlatList
-          className="h-[70%]"
+          className="h-[65%]"
           data={filterTasks(textFilter)} // Uso do filtro
           renderItem={({ item }) => (
             <CardTask
@@ -145,7 +145,8 @@ export default function Tasks() {
           contentContainerStyle={{
             justifyContent: 'center',
             alignItems: 'center',
-            paddingBottom: 30,
+            paddingBottom: 10,
+            paddingTop: 10,
           }}
         />
       </View>
