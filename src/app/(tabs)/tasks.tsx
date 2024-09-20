@@ -25,6 +25,7 @@ export default function Tasks() {
   const [taskTime, setTaskTime] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [textName, setTextName] = useState('');
+  const [textFilter, setTextFilter] = useState('');
 
   useEffect(() => {
     getTasks();
@@ -91,12 +92,39 @@ export default function Tasks() {
     getTasks();
   }
 
+  function filterTasks(task: String) {
+    if (textFilter === '') {
+      return tasks;
+    }
+
+    return tasks.filter((task: { taskName: string }) =>
+      task.taskName.toLowerCase().includes(textFilter.toLowerCase()),
+    );
+  }
+
   return (
     <View className="flex-1 bg-white pt-14 p-4 relative">
       {/* Header */}
       <View className="items-center justify-center mb-4">
         <Text className="text-2xl font-bold">Today's Task</Text>
         <Text className="text-slate-400">{dataToday}</Text>
+        <TextInput
+          placeholder="Pesquisar Tarefas"
+          cursorColor={'#000'} // Cor do cursor
+          placeholderTextColor="#888" // Cor do texto placeholder
+          onChangeText={setTextFilter} // Função para capturar a entrada do usuário
+          value={textFilter} // Valor do input
+          style={{
+            width: '90%', // Largura do input
+            borderColor: '#ccc', // Cor da borda
+            borderWidth: 1, // Largura da borda
+            borderRadius: 8, // Bordas arredondadas
+            padding: 5, // Espaçamento interno
+            marginTop: 15, // Espaçamento inferior
+            backgroundColor: '#f9f9f9', // Cor de fundo
+            textAlign: 'center', // Alinhamento do texto
+          }}
+        />
       </View>
 
       {/* Body */}
