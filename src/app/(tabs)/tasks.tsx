@@ -61,7 +61,7 @@ export default function Tasks() {
 
     const formattedDate = `${dayName}, ${day} de ${monthName}`;
     setDataToday(formattedDate);
-  }, [tasks]);
+  }, []);
 
   async function getTasks() {
     const tasksStorage = await AsyncStorage.getItem('@tasks');
@@ -92,12 +92,12 @@ export default function Tasks() {
     getTasks();
   }
 
-  function filterTasks(task: String) {
+  function filterTasks(textFilter: string) {
     if (textFilter === '') {
-      return tasks;
+      return tasks; // Retorna todas as tarefas se não houver filtro
     }
-
-    return tasks.filter((task: { taskName: string }) =>
+  
+    return tasks.filter((task: Task) =>
       task.taskName.toLowerCase().includes(textFilter.toLowerCase()),
     );
   }
@@ -130,7 +130,7 @@ export default function Tasks() {
       {/* Body */}
       <View className="w-full items-center justify-center">
         <FlatList
-          data={tasks}
+          data={filterTasks(textFilter)} // Uso do filtro
           renderItem={({ item }) => (
             <CardTask
               key={item.id}
