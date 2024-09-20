@@ -3,8 +3,10 @@ import React from 'react';
 
 export default function Activity() {
   return (
-    <View className="flex-1 bg-gray-900 pt-14 p-4 items-center justify-center">
-      <Text className="text-white text-2xl font-heading">Meetings</Text>
+    <View className="flex-1 bg-white pt-14 p-4 items-center justify-center">
+      <Text className="color-gray-900 text-lg">
+        Não há atividades recentes. ‌
+      </Text>
     </View>
   );
 }

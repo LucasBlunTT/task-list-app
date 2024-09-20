@@ -96,7 +96,7 @@ export default function Tasks() {
     if (textFilter === '') {
       return tasks;
     }
-  
+
     return tasks.filter((task: Task) =>
       task.taskName.toLowerCase().includes(textFilter.toLowerCase()),
     );
@@ -130,6 +130,7 @@ export default function Tasks() {
       {/* Body */}
       <View className="w-full items-center justify-center">
         <FlatList
+          className="h-[70%]"
           data={filterTasks(textFilter)} // Uso do filtro
           renderItem={({ item }) => (
             <CardTask
