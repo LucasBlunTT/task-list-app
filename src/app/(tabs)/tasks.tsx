@@ -29,6 +29,7 @@ export default function Tasks() {
 
   useEffect(() => {
     getTasks();
+    //saveTaskFake();
 
     const date = new Date();
     const days = [
@@ -85,6 +86,23 @@ export default function Tasks() {
 
     await AsyncStorage.setItem('@tasks', JSON.stringify(tasksUpdated));
   }
+
+  // async function saveTaskFake() {
+  //   // Gera 10 tarefas fictícias
+  //   const fakeTasks = Array.from({ length: 10 }, (_, index) => ({
+  //     id: String(Math.random()),
+  //     taskName: `Tarefa ${index + 1}`, // Nome fictício da tarefa
+  //     taskTime: `12:0${index} PM`, // Tempo fictício
+  //     completo: false, // Todas as tarefas começam como não concluídas
+  //   }));
+
+  //   // Atualiza o estado com as tarefas fictícias
+  //   const tasksUpdated = [...tasks, ...fakeTasks];
+  //   setTasks(tasksUpdated);
+
+  //   // Armazena as tarefas no AsyncStorage
+  //   await AsyncStorage.setItem('@tasks', JSON.stringify(tasksUpdated));
+  // }
 
   async function cleanTask() {
     await AsyncStorage.removeItem('@tasks');
@@ -151,7 +169,7 @@ export default function Tasks() {
       </View>
 
       {/* Card ADD Tasks */}
-      <View className="absolute w-full bottom-0 right-4">
+      <View className="flex-1 jus">
         <CleanTask onPress={cleanTask} />
         <AddTask onPress={() => setOpenModal(true)} />
       </View>
