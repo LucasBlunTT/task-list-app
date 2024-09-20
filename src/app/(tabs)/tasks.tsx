@@ -104,6 +104,10 @@ export default function Tasks() {
   //   await AsyncStorage.setItem('@tasks', JSON.stringify(tasksUpdated));
   // }
 
+  async function getTasksComplete(){
+
+  }
+
   async function cleanTask() {
     await AsyncStorage.removeItem('@tasks');
     setTasks([]);
