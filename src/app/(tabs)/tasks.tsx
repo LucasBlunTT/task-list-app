@@ -146,7 +146,6 @@ export default function Tasks() {
             justifyContent: 'center',
             alignItems: 'center',
             paddingBottom: 10,
-            paddingTop: 10,
           }}
         />
       </View>
